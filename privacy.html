@@ -3,8 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Privacy Policy | Recoder Health Solutions</title>
-  <meta name="description" content="How Recoder Health Solutions (Karla Hernandez, licensed health insurance advisor) handles the information you share through this website.">
+  <title data-es="Política de Privacidad | Recoder Health Solutions">Privacy Policy | Recoder Health Solutions</title>
+  <meta name="description"
+        content="How Recoder Health Solutions (Karla Hernandez, licensed health insurance advisor) handles the information you share through this website."
+        data-es-content="Cómo maneja Recoder Health Solutions (Karla Hernandez, asesora de seguros de salud con licencia) la información que usted comparte a través de este sitio web.">
   <meta name="theme-color" content="#33423f">
   <link rel="canonical" href="https://recoderhealthsolutions.com/privacy.html">
   <link rel="icon" href="assets/favicon.ico" sizes="any">
@@ -14,67 +16,84 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <script>document.documentElement.classList.add('js');</script>
 </head>
 <body class="legal-page">
+  <!-- Icon sprite (only what this page uses) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></symbol>
+    </defs>
+  </svg>
+
   <header class="site-header">
     <div class="wrap header-inner">
-      <a class="brand" href="./" aria-label="Recoder Health Solutions, home">
+      <a class="brand" href="index.html" aria-label="Recoder Health Solutions, home" data-es-aria-label="Recoder Health Solutions, inicio">
         <img src="assets/logo-medallion-sm.png" alt="" width="46" height="46">
         <span class="brand-text">
           <span class="brand-name">Recoder Health</span>
           <span class="brand-sub">Solutions</span>
         </span>
       </a>
-      <a class="btn btn-ghost btn-sm" href="index.html">← Back to site</a>
+      <div class="header-actions">
+        <div class="lang-toggle" role="group" aria-label="Language / Idioma">
+          <svg class="ico lang-ico" aria-hidden="true"><use href="#i-globe"/></svg>
+          <button type="button" data-lang-btn="en" lang="en" aria-label="English" aria-pressed="true">EN</button>
+          <button type="button" data-lang-btn="es" lang="es" aria-label="Español" aria-pressed="false">ES</button>
+        </div>
+        <a class="btn btn-ghost btn-sm legal-back" href="index.html" data-es="← Volver al sitio">← Back to site</a>
+      </div>
     </div>
   </header>
 
   <!--
     NOTE FOR KARLA: this policy is adapted from the structure of Chasin' Coverage's privacy policy and
     describes how this site is built. Please confirm every statement matches how you actually work
-    (and have it reviewed if you wish) before relying on it.
+    (and have it reviewed if you wish) before relying on it. The Spanish is in the data-es attributes.
   -->
   <main class="legal">
     <div class="wrap">
-      <p class="eyebrow eyebrow-dark"><span class="eyebrow-line"></span>Legal</p>
-      <h1>Privacy Policy</h1>
-      <p class="meta">Recoder Health Solutions · Effective October 15, 2026</p>
+      <p class="eyebrow eyebrow-dark"><span class="eyebrow-line"></span><span data-es="Legal">Legal</span></p>
+      <h1 data-es="Política de Privacidad">Privacy Policy</h1>
+      <p class="meta" data-es="Recoder Health Solutions · Vigente desde el 15 de octubre de 2026">Recoder Health Solutions · Effective October 15, 2026</p>
 
-      <p>This policy explains what information Recoder Health Solutions (Karla Hernandez, licensed health insurance advisor) collects through recoderhealthsolutions.com and what we do with it.</p>
+      <p data-es="Esta política explica qué información recopila Recoder Health Solutions (Karla Hernandez, asesora de seguros de salud con licencia) a través de recoderhealthsolutions.com y qué hacemos con ella.">This policy explains what information Recoder Health Solutions (Karla Hernandez, licensed health insurance advisor) collects through recoderhealthsolutions.com and what we do with it.</p>
 
-      <h2>1. Information you give us</h2>
-      <p>If you book a consultation, send a message through the website form, or contact us by phone, text or email, we receive what you choose to share: typically your name, contact details, who needs coverage and your current insurance situation. We use it only to schedule and prepare for your consultation and to follow up about it.</p>
+      <h2 data-es="1. Información que usted nos da">1. Information you give us</h2>
+      <p data-es="Si reserva una consulta, envía un mensaje mediante el formulario del sitio o se comunica con nosotros por teléfono, texto o correo electrónico, recibimos lo que usted decida compartir: normalmente su nombre, sus datos de contacto, quién necesita cobertura y su situación actual de seguros. La usamos únicamente para programar y preparar su consulta y para darle seguimiento.">If you book a consultation, send a message through the website form, or contact us by phone, text or email, we receive what you choose to share: typically your name, contact details, who needs coverage and your current insurance situation. We use it only to schedule and prepare for your consultation and to follow up about it.</p>
 
-      <h2>2. Information we do not ask for online</h2>
-      <p>Please do not send Social Security numbers, dates of birth, health conditions or payment information through this website. If that information is ever needed, it is collected during a consultation or through an insurance carrier’s own secure application.</p>
+      <h2 data-es="2. Información que no solicitamos en línea">2. Information we do not ask for online</h2>
+      <p data-es="Por favor, no envíe números de Seguro Social, fechas de nacimiento, condiciones de salud ni información de pago a través de este sitio web. Si alguna vez se necesita esa información, se recopila durante una consulta o mediante la solicitud segura de la propia aseguradora.">Please do not send Social Security numbers, dates of birth, health conditions or payment information through this website. If that information is ever needed, it is collected during a consultation or through an insurance carrier’s own secure application.</p>
 
-      <h2>3. Sharing</h2>
-      <p>We do not sell your information. We share it only with insurance carriers when you ask us to apply for coverage, with service providers that help us operate (for example, scheduling and email tools), and when required by law.</p>
+      <h2 data-es="3. Cómo compartimos la información">3. Sharing</h2>
+      <p data-es="No vendemos su información. La compartimos únicamente con aseguradoras cuando usted nos pide solicitar una cobertura, con proveedores de servicios que nos ayudan a operar (por ejemplo, herramientas de citas y de correo electrónico) y cuando la ley lo exige.">We do not sell your information. We share it only with insurance carriers when you ask us to apply for coverage, with service providers that help us operate (for example, scheduling and email tools), and when required by law.</p>
 
-      <h2>4. Scheduling, cookies and analytics</h2>
-      <p>Appointments are booked through Calendly, an embedded third-party tool that handles your booking details under its own privacy policy and may set its own cookies. This website loads fonts from Google Fonts. We do not use advertising trackers on this site.</p>
+      <h2 data-es="4. Citas, cookies y analítica">4. Scheduling, cookies and analytics</h2>
+      <p data-es="Las citas se reservan mediante Calendly, una herramienta de terceros integrada que maneja los datos de su reserva según su propia política de privacidad y puede colocar sus propias cookies. Este sitio web carga tipografías de Google Fonts. No usamos rastreadores publicitarios en este sitio. Su elección de idioma (inglés o español) se guarda únicamente en su propio navegador.">Appointments are booked through Calendly, an embedded third-party tool that handles your booking details under its own privacy policy and may set its own cookies. This website loads fonts from Google Fonts. We do not use advertising trackers on this site. Your language choice (English or Spanish) is saved only in your own browser.</p>
 
-      <h2>5. Retention and your choices</h2>
-      <p>We keep consultation information as long as needed to serve you and as required by insurance record-keeping rules. You can ask us to update or delete your information, or to stop contacting you, at any time using the details below. We contact you only in response to a request you have made.</p>
+      <h2 data-es="5. Conservación y sus opciones">5. Retention and your choices</h2>
+      <p data-es="Conservamos la información de las consultas el tiempo que sea necesario para atenderle y según lo exigen las normas de conservación de registros de seguros. Puede pedirnos que actualicemos o eliminemos su información, o que dejemos de contactarle, en cualquier momento mediante los datos de contacto que aparecen abajo. Solo le contactamos en respuesta a una solicitud suya.">We keep consultation information as long as needed to serve you and as required by insurance record-keeping rules. You can ask us to update or delete your information, or to stop contacting you, at any time using the details below. We contact you only in response to a request you have made.</p>
 
-      <h2>6. Changes</h2>
-      <p>We may update this policy. The effective date above will change when we do.</p>
+      <h2 data-es="6. Cambios">6. Changes</h2>
+      <p data-es="Es posible que actualicemos esta política. La fecha de vigencia de arriba cambiará cuando lo hagamos.">We may update this policy. The effective date above will change when we do.</p>
 
-      <h2>7. Contact</h2>
+      <h2 data-es="7. Contacto">7. Contact</h2>
       <p>Recoder Health Solutions · <a href="tel:+18323664080">832-366-4080</a> · <a href="mailto:recoderhealth@gmail.com">recoderhealth@gmail.com</a></p>
 
-      <a class="btn btn-dark back" href="index.html">← Back to site</a>
+      <a class="btn btn-dark back" href="index.html" data-es="← Volver al sitio">← Back to site</a>
     </div>
   </main>
 
   <footer class="site-footer">
     <div class="wrap">
       <div class="footer-bottom" style="border-top:0;padding-top:0">
-        <span>© <span id="year">2026</span> Recoder Health Solutions. All rights reserved.</span>
-        <a href="index.html">Home</a>
+        <span>© <span id="year">2026</span> Recoder Health Solutions. <span data-es="Todos los derechos reservados.">All rights reserved.</span></span>
+        <a href="index.html" data-es="Inicio">Home</a>
       </div>
     </div>
   </footer>
+
+  <script src="lang.js"></script>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>

@@ -1,5 +1,7 @@
 /* Recoder Health Solutions · Karla Hernandez
-   Small, dependency-free helpers. Everything degrades gracefully if this file fails to load. */
+   Small, dependency-free helpers. Everything degrades gracefully if this file fails to load.
+   (Language switching itself lives in lang.js; the text here is the English / Spanish for messages
+   that are created by script rather than written in the HTML.) */
 (() => {
   'use strict';
 
@@ -17,22 +19,57 @@
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* ---------------- Text made by script (English / Español) ---------------- */
+  const TEXT = {
+    en: {
+      menuOpen: 'Open menu',
+      menuClose: 'Close menu',
+      announceSpecial: 'Life changes? You may qualify for a Special Enrollment Period. Let’s check.',   // Jan 1 – Sep 30
+      announceSoon: 'Marketplace Open Enrollment begins Nov 1. Book your free consultation early.',       // Oct 1 – Oct 31
+      announceOpen: 'Open Enrollment is underway. Book a free call before your deadline.',                // Nov 1 – Dec 31
+      formNeed: 'Please add your name and a valid email so Karla can reply.',
+      sending: 'Sending…',
+      sent: 'Thank you! Your message is on its way, and Karla will be in touch soon.',
+      failed: 'That didn’t go through. Opening an email draft instead.',
+      draftOpening: `Opening your email app. If nothing opens, email ${EMAIL} or call ${PHONE_DISPLAY}.`,
+      subject: (name) => `Website inquiry from ${name}`,
+      labels: { name: 'Name', phone: 'Phone', email: 'Email', topic: 'Interested in', language: 'Preferred language' },
+      langName: 'English'
+    },
+    es: {
+      menuOpen: 'Abrir menú',
+      menuClose: 'Cerrar menú',
+      announceSpecial: '¿Cambios en su vida? Podría calificar para un Período Especial de Inscripción. Revisémoslo.',
+      announceSoon: 'La Inscripción Abierta del Marketplace comienza el 1 de nov. Reserve su consulta gratis con tiempo.',
+      announceOpen: 'La Inscripción Abierta está en marcha. Reserve una llamada gratis antes de su fecha límite.',
+      formNeed: 'Por favor, agregue su nombre y un correo electrónico válido para que Karla pueda responderle.',
+      sending: 'Enviando…',
+      sent: '¡Gracias! Su mensaje va en camino y Karla se comunicará con usted pronto.',
+      failed: 'No se pudo enviar. Abriremos un borrador de correo en su lugar.',
+      draftOpening: `Abriendo su aplicación de correo. Si no se abre, escriba a ${EMAIL} o llame al ${PHONE_DISPLAY}.`,
+      subject: (name) => `Mensaje desde el sitio web de ${name}`,
+      labels: { name: 'Nombre', phone: 'Teléfono', email: 'Correo', topic: 'Interesado(a) en', language: 'Idioma preferido' },
+      langName: 'Español'
+    }
+  };
+  const lang = () => (window.RHS_LANG ? window.RHS_LANG.get() : 'en');
+  const tx = () => TEXT[lang()] || TEXT.en;
+
   /* ---------------- Footer year ---------------- */
   const year = $('#year');
   if (year) year.textContent = new Date().getFullYear();
 
   /* ---------------- Seasonal announcement bar ----------------
      Swaps the message depending on the date so the site never looks stale.   */
-  (() => {
+  const renderAnnounce = () => {
     const el = $('#announceText');
     if (!el) return;
     const now = new Date();
     const day = (now.getMonth() + 1) * 100 + now.getDate();   // Oct 15 -> 1015
-    let msg = 'Life changes? You may qualify for a Special Enrollment Period. Let’s check.';   // Jan 1 – Sep 30
-    if (day >= 1101)      msg = 'Open Enrollment is underway. Book a free call before your deadline.';              // Nov 1 – Dec 31
-    else if (day >= 1001) msg = 'Marketplace Open Enrollment begins Nov 1. Book your free consultation early.';    // Oct 1 – Oct 31
-    el.textContent = msg;
-  })();
+    const t = tx();
+    el.textContent = day >= 1101 ? t.announceOpen : day >= 1001 ? t.announceSoon : t.announceSpecial;
+  };
+  renderAnnounce();
 
   /* ---------------- Header: scrolled state + mobile menu ---------------- */
   const header = $('.site-header');
@@ -41,13 +78,17 @@
   window.addEventListener('scroll', onScroll, { passive: true });
 
   const toggle = $('#navToggle');
+  const menuLabel = () => {
+    if (toggle) toggle.setAttribute('aria-label', toggle.getAttribute('aria-expanded') === 'true' ? tx().menuClose : tx().menuOpen);
+  };
   const setMenu = (open) => {
     if (!header || !toggle) return;
     header.classList.toggle('nav-open', open);
     toggle.setAttribute('aria-expanded', String(open));
-    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    menuLabel();
   };
   if (toggle) {
+    menuLabel();
     toggle.addEventListener('click', () => setMenu(toggle.getAttribute('aria-expanded') !== 'true'));
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
     $$('#nav a').forEach((a) => a.addEventListener('click', () => setMenu(false)));
@@ -162,6 +203,7 @@
 
       const data = Object.fromEntries(new FormData(form).entries());
       delete data.website;
+      data.language = tx().langName;           // lets Karla see which language the visitor was reading
 
       let ok = true;
       ['name', 'email'].forEach((n) => {
@@ -170,27 +212,28 @@
         input.closest('.field').classList.toggle('invalid', bad);
         if (bad && ok) { input.focus(); ok = false; }
       });
-      if (!ok) { say('Please add your name and a valid email so Karla can reply.', true); return; }
+      if (!ok) { say(tx().formNeed, true); return; }
 
       const openEmailDraft = () => {
-        const subject = `Website inquiry from ${data.name}`;
+        const t = tx();
         const body = [
-          `Name: ${data.name}`,
-          `Phone: ${data.phone || '-'}`,
-          `Email: ${data.email}`,
-          `Interested in: ${data.topic}`,
+          `${t.labels.name}: ${data.name}`,
+          `${t.labels.phone}: ${data.phone || '-'}`,
+          `${t.labels.email}: ${data.email}`,
+          `${t.labels.topic}: ${data.topic}`,
+          `${t.labels.language}: ${data.language}`,
           '',
           data.message || ''
         ].join('\n');
-        window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        say(`Opening your email app. If nothing opens, email ${EMAIL} or call ${PHONE_DISPLAY}.`);
+        window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(t.subject(data.name))}&body=${encodeURIComponent(body)}`;
+        say(t.draftOpening);
       };
 
       if (!FORM_ENDPOINT) { openEmailDraft(); return; }
 
       const btn = form.querySelector('button[type="submit"]');
       btn.disabled = true;
-      say('Sending…');
+      say(tx().sending);
       try {
         const res = await fetch(FORM_ENDPOINT, {
           method: 'POST',
@@ -199,9 +242,9 @@
         });
         if (!res.ok) throw new Error(String(res.status));
         form.reset();
-        say('Thank you! Your message is on its way, and Karla will be in touch soon.');
+        say(tx().sent);
       } catch (err) {
-        say('That didn’t go through. Opening an email draft instead.', true);
+        say(tx().failed, true);
         openEmailDraft();
       } finally {
         btn.disabled = false;
@@ -213,4 +256,11 @@
       if (f) f.classList.remove('invalid');
     });
   }
+
+  /* ---------------- Language change: refresh the text this script owns ---------------- */
+  window.addEventListener('langchange', () => {
+    renderAnnounce();
+    menuLabel();
+    if (status) { status.textContent = ''; status.classList.remove('error'); }
+  });
 })();

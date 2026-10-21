@@ -99,7 +99,8 @@ em { font-style: italic; }
 .brand-name { font-family: var(--serif); font-size: 1.45rem; font-weight: 600; letter-spacing: .01em; }
 .brand-sub { font-size: .66rem; letter-spacing: .34em; text-transform: uppercase; color: var(--gold-light); margin-top: 5px; font-weight: 600; }
 
-.nav { display: flex; align-items: center; gap: clamp(16px, 2.4vw, 34px); }
+.nav { display: flex; align-items: center; gap: clamp(14px, 1.8vw, 28px); }
+.brand-text, .nav a, .nav .btn { white-space: nowrap; }
 .nav a:not(.btn) { position: relative; color: var(--muted-light); font-weight: 600; font-size: .94rem; padding: 6px 0; transition: color .2s; }
 .nav a:not(.btn)::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1.5px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform .3s var(--ease); }
 .nav a:not(.btn):hover, .nav a.is-current { color: #fff; }
@@ -110,6 +111,14 @@ em { font-style: italic; }
 .nav-toggle .ico-close { display: none; }
 .nav-open .nav-toggle .ico-menu { display: none; }
 .nav-open .nav-toggle .ico-close { display: block; }
+
+/* ---------- Language toggle (EN / ES) ---------- */
+.header-actions { display: flex; align-items: center; gap: 12px; }
+.lang-toggle { display: inline-flex; align-items: center; gap: 2px; padding: 3px 3px 3px 12px; border-radius: 999px; border: 1px solid rgba(224, 198, 129, .42); background: rgba(255, 255, 255, .04); }
+.lang-ico { width: 15px; height: 15px; margin-right: 6px; color: var(--gold-light); opacity: .9; }
+.lang-toggle button { border: 0; background: transparent; color: var(--muted-light); font-weight: 800; font-size: .76rem; letter-spacing: .12em; line-height: 1; padding: 9px 12px; border-radius: 999px; transition: background .25s, color .25s, box-shadow .25s; }
+.lang-toggle button:hover { color: #fff; }
+.lang-toggle button[aria-pressed="true"] { background: linear-gradient(135deg, #e6cd8e 0%, #c09441 100%); color: var(--green-900); box-shadow: 0 6px 14px -6px rgba(192, 148, 65, .9); }
 
 /* ---------- Buttons ---------- */
 .btn {
@@ -390,6 +399,7 @@ h2 em, h1 em { color: var(--gold); }
 .legal p { color: var(--ink); margin-bottom: 10px; }
 .legal a:not(.btn) { color: var(--gold-deep); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
 .legal .back { display: inline-flex; align-items: center; gap: 8px; margin-top: 26px; }
+@media (max-width: 680px) { .legal-back { display: none; } }
 
 /* ---------- Mobile quick bar ---------- */
 .mobile-bar { display: none; }
@@ -402,7 +412,8 @@ h2 em, h1 em { color: var(--gold); }
   .cards { grid-template-columns: repeat(2, 1fr); }
 }
 
-@media (max-width: 960px) {
+/* The nav (6 items + language toggle) needs room; below this width it folds into the menu button. */
+@media (max-width: 1160px) {
   .nav-toggle { display: inline-flex; }
   .nav {
     position: absolute; left: 0; right: 0; top: 100%; flex-direction: column; align-items: stretch; gap: 0;
@@ -414,7 +425,9 @@ h2 em, h1 em { color: var(--gold); }
   .nav a:not(.btn) { padding: 16px 4px; font-size: 1.05rem; border-bottom: 1px solid rgba(224, 198, 129, .12); }
   .nav a:not(.btn)::after { display: none; }
   .nav-cta { margin-top: 18px; padding: 16px; }
+}
 
+@media (max-width: 960px) {
   .hero-grid { grid-template-columns: 1fr; }
   .hero-visual { order: -1; max-width: 420px; margin-inline: auto; width: 100%; padding-top: 10px; }
   .hero-copy { text-align: left; }
@@ -436,6 +449,11 @@ h2 em, h1 em { color: var(--gold); }
   .trust { grid-template-columns: 1fr; gap: 14px; }
   .brand-name { font-size: 1.28rem; }
   .brand img { width: 42px; height: 42px; }
+  .header-actions { gap: 8px; }
+  .lang-toggle { padding: 3px; }
+  .lang-ico { display: none; }
+  .lang-toggle button { padding: 9px 11px; }
+  .nav-toggle { width: 42px; height: 42px; }
   .glass-name { left: 0; }
   .glass-chip { top: 30px; right: -4px; font-size: .76rem; }
   .arch::before { transform: translate(12px, 14px); }

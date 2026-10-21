@@ -4,13 +4,31 @@ A fast, single-page marketing site for Karla Hernandez (licensed health insuranc
 Plain HTML, CSS and a little JavaScript: **no build step, no dependencies.**
 
 ```
-index.html       the site
-privacy.html     privacy policy (linked from the footer)
+index.html       the site (English text, with the Spanish next to it in data-es="..." attributes)
+privacy.html     privacy policy (linked from the footer), also in both languages
 styles.css       all styling (brand colours are the variables at the top)
+lang.js          the English / Español switch
 script.js        menu, scroll effects, tabs, Calendly loader, contact form
 assets/          logo, bull mark, portrait, favicons, social-share image
 robots.txt  sitemap.xml
 ```
+
+## English / Español
+
+Karla is bilingual and the site says so (hero badge, About section, FAQ, the scrolling band and Google's
+structured data). The **EN | ES** switch in the header translates the whole page, including the form and the
+privacy page.
+
+- **Editing a translation:** every translated element has its Spanish in a `data-es="..."` attribute right
+  beside the English. Change either one in `index.html` or `privacy.html`; no other file needs touching.
+- **Messages made by script** (the top banner, form confirmations): the `TEXT` block at the top of `script.js`.
+- **Which language a visitor sees first:** their saved choice, otherwise Spanish if their browser is set to
+  Spanish, otherwise English. The choice is remembered in their own browser only.
+- **A link that opens in Spanish** (for Spanish-language posts, ads or texts):
+  `https://recoderhealthsolutions.com/?lang=es`
+- **Calendly** chooses its own language from the visitor's browser; it isn't controlled by the switch.
+- **Google** reads the page in English at the main address. If she later wants Spanish pages to show up in
+  Spanish search results, the next step is a separate `/es/` page.
 
 ## See it locally
 
@@ -55,6 +73,9 @@ into `FORM_ENDPOINT` at the top of `script.js`.
   list. Swap in her own words or the bio she wrote earlier.
 - **Services**: Medical, Small Business / Self-Employed, Life, Dental & Vision, Life Changes & Plan Reviews. Remove
   or add cards to match exactly what she sells.
+- **The Spanish**: written as a first draft for her to review. It uses the formal "usted" and the usual insurance
+  terms (Inscripción Abierta, Período Especial de Inscripción, Mercado de Seguros Médicos). She will know best
+  whether the tone and word choices sound right to her Spanish-speaking clients.
 - **"No fee for my guidance"** (hero, FAQ): standard for agents paid by carriers; confirm it matches how she is paid.
 - **Enrollment dates**: the Marketplace card says only "Begins Nov 1" because end dates change by state and year.
   Add the current deadline once she confirms it.
